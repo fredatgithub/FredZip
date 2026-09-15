@@ -189,10 +189,10 @@ namespace FredZip
       display("/help (this help)");
       display("/? (this help)");
       display(string.Empty);
-      display("/onezipfileperfile=<true or false> default is true");
-      display(string.Empty);
       display("You can write argument name (not its value) in uppercase or lowercase or a mixed of them (case insensitive)");
       display("/compressionlevel is the same as /Compressionlevel or /CompressionLevel or /COMPRESSIONLEVEL");
+      display(string.Empty);
+      display("/onezipfileperfile=<true or false> default is true");
       display(string.Empty);
       display("/directory=<name of the directory where files will be zipped> default is where FredZip.exe is");
       display(string.Empty);
@@ -315,6 +315,20 @@ namespace FredZip
           zipStream.Dispose();
         }
       }
+    }
+
+    public static bool IsFileBinary(string filename, string commaSeparatedBinaryExtensions)
+    {
+      bool result = false;
+      foreach (string extension in commaSeparatedBinaryExtensions.Split(','))
+      {
+        if (Path.GetExtension(filename) == extension)
+        {
+          return true;
+        }
+      }
+
+      return result;
     }
   }
 }
